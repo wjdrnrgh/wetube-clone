@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+    if errorMessage
+        h3=errorMessage
+    form(method="POST")
+        input(name="name" type="text" placeholder="Name" value=user.name)
+        input(name="email" type="email" placeholder="Email" value=user.email)
+        input(name="username" type="text" placeholder="Username" value=user.username)
+        input(name="location" type="text" placeholder="Location" value=user.location)
+        input(type="submit", value="Update Profile")
