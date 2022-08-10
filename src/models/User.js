@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre("save", async function () {
-  console.log(this.password); //암호화 전
+  console.log(`Before Password : ${this.password}`); //암호화 전
   this.password = await bcrypt.hash(this.password, 5);
-  console.log(this.password); //암호화 후
+  console.log(`After Password : ${this.password}`); //암호화 후
 });
 
 const User = mongoose.model("User", userSchema);

@@ -1,13 +1,5 @@
 import mongoose from "mongoose";
 
-/*
-export const formatHashtags = (hashtags) => {
-  return hashtags
-    .split(",")
-    .map((word) => (word.startsWith("#") ? word : `#${word}`));
-};
-*/
-
 const videoSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true, maxLength: 80 },
   description: { type: String, required: true, trim: true, minLength: 20 },
@@ -25,10 +17,6 @@ videoSchema.static("formatHashtags", function (hashtags) {
   return hashtags
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
-});
-
-videoSchema.pre("save", async function () {
-  console.log("Im a Middleware => ", this);
 });
 
 const movieModel = mongoose.model("Video", videoSchema);

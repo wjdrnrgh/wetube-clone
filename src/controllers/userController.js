@@ -4,7 +4,6 @@ import User from "../models/User";
 import bcrypt from "bcrypt";
 //backEnd fatch
 import fetch from "cross-fetch";
-import session from "express-session";
 
 //root
 //root - join
@@ -91,7 +90,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
+    console.log(`User Data : ${userData}`);
     //user 정보를 읽어오더라도, 해당 유저의 email 정보가 private 설정 되어있는 경우 null로 표시되는 경우
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
@@ -100,7 +99,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(emailData);
+    console.log(`Email Data : ${emailData}`);
 
     //로그인 성공 또는 실패 절차
     //응답받은 이메일 정보 안에 primary, verified 값이 모두 true인 이메일 정보 추출
@@ -177,14 +176,16 @@ export const postEdit = async (req, res) => {
     },
     //form info
     body: { name, email, username, location },
+    //upload file info
+    file,
   } = req;
+  console.log(file);
 
   //과제 : 사용자가 변경하려하는 정보(userName, Email)가 이미 있는 경우에 대한 처리
   if (req.session.user.email !== req.body.email) {
     //현재 session 정보의 email 값과 form 내 email 값이 다른 경우
     const existsEmail = await User.exists({ email: req.body.email });
     if (existsEmail) {
-      console.log("이메일 중복");
       return res.status(400).render("edit-profile", {
         pageTitle: "Edit Profile",
         errorMessage: "이미 존재하는 이메일입니다.",
@@ -195,7 +196,6 @@ export const postEdit = async (req, res) => {
     //현재 session 정보의 username 값과 form 내 username 값이 다른 경우
     const existsUsername = await User.exists({ username: req.body.username });
     if (existsUsername) {
-      console.log("아이디 중복");
       return res.status(400).render("edit-profile", {
         pageTitle: "Edit Profile",
         errorMessage: "이미 존재하는 아이디입니다.",
@@ -218,6 +218,46 @@ export const postEdit = async (req, res) => {
   );
   req.session.user = updateUser; //form 내 값들의 실시간 변화를 사용자에게 보여주기 위해 session update
   return res.redirect("/users/edit");
+};
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.githubLogin === true) {
+    return res.redirect("/");
+  }
+  return res.render("change-password", { pageTitle: "Change Password" });
+};
+export const postChangePassword = async (req, res) => {
+  // send notification
+  const {
+    //ES6 방식으로 코드 간소화
+    //session info
+    session: {
+      user: { _id },
+    },
+    //form info
+    body: { oldPassword, newPassword, confirmPassword },
+  } = req;
+  const user = await User.findById(_id);
+  const verification = await bcrypt.compare(oldPassword, user.password);
+  if (!verification) {
+    return res.status(400).render("change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "기존 비밀번호가 일치하지 않습니다.",
+    });
+  }
+  if (newPassword !== confirmPassword) {
+    return res.status(400).render("change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "신규 비밀번호가 일치하지 않습니다.",
+    });
+  }
+  //password hash And update
+  user.password = newPassword;
+  await user.save();
+  //session update
+  req.session.user.password = user.password;
+
+  return res.redirect("/users/logout"); //비밀번호가 변경되어 강제 로그아웃
 };
 
 export const logout = (req, res) => {
