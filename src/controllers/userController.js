@@ -33,6 +33,7 @@ export const postJoin = async (req, res) => {
       email,
       password,
       location,
+      avatarUrl: "",
     });
     return res.redirect("/login");
   } catch (error) {
@@ -172,7 +173,7 @@ export const postEdit = async (req, res) => {
     //ES6 방식으로 코드 간소화
     //session info
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     //form info
     body: { name, email, username, location },
@@ -209,6 +210,7 @@ export const postEdit = async (req, res) => {
     {
       //form 에서 입력받은 정보로 update
       //new: true 옵션을 통해 update된 정보를 return 받을 수 있다.
+      avatarUrl: file ? file.path : avatarUrl, //사용자가 업데이트한 이미지가 없다면(req.file = ubdefined 상태) 기존 형태를 유지
       name,
       email,
       username,
