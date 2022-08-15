@@ -13,7 +13,8 @@ export const home = async (req, res) => {
 //video  "get"
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id);
+  const video = await Video.findById(id).populate("owner");
+  console.log(video);
   if (video === null) {
     return res.render("404", { pageTitle: "Video Not Found" });
   }
@@ -73,14 +74,19 @@ export const postEdit = async (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
+  const {
+    user: { _id },
+  } = req.session;
+  const file = req.file;
   const { title, description, hashtags } = req.body;
   try {
     await Video.create({
       //Promise 함수를 사용하여 생성한 비디오 데이터가 database에 저장될 때 까지 기다린다.
       title: title,
       description: description,
-      //createdAt: Date.now(), -> Video model에서 직접 처리하도록 수정
+      fileUrl: file.path,
       hashtags: Video.formatHashtags(hashtags),
+      owner: _id,
     });
   } catch (error) {
     return res.status(400).render("upload", {

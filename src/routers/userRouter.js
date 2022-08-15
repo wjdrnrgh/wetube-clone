@@ -14,7 +14,7 @@ import {
 
 //Middleware
 import {
-  multerMiddleware,
+  avatarUpload,
   protectorMiddleware,
   publicOnlyMiddleware,
 } from "../middlewares";
@@ -26,7 +26,7 @@ userRouter
   .route("/edit")
   .all(protectorMiddleware) //all 함수는 http 모든 method에 대한 대응을 한다.
   .get(getEdit)
-  .post(multerMiddleware.single("avatar"), postEdit); //multerMiddleware의 사용과 업로드 옵션(single, array 등)을 설정, 형식 : Router.url+.post(multerMiddleware.option(inputName),controller)
+  .post(avatarUpload.single("avatar"), postEdit); //multerMiddleware의 사용과 업로드 옵션(single, array 등)을 설정, 형식 : Router.url+.post(multerMiddleware.option(inputName),controller)
 userRouter
   .route("/change-password")
   .all(protectorMiddleware)

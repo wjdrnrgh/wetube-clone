@@ -1,5 +1,6 @@
 //database user model
 import User from "../models/User";
+import Video from "../models/Video";
 //password hashing module
 import bcrypt from "bcrypt";
 //backEnd fatch
@@ -266,4 +267,12 @@ export const logout = (req, res) => {
   req.session.destroy(); //연결된 session 종료 후 home 화면으로 이동
   return res.redirect("/");
 };
-export const profile = (req, res) => res.send("Account Profile");
+export const profile = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).render("404", { pageTitle: "User Not Found" });
+  }
+  const videos = await Video.find({ owner: user._id });
+  return res.render("profile", { pageTitle: user.name, user, videos });
+};
