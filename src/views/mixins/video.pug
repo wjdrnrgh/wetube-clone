@@ -5,6 +5,8 @@ mixin video(video)
             p=video.description
             small=video.createdAt
             ul
-            each hashtag in video.hashtags
-                li=hashtag
+                each hashtag in video.hashtags
+                    li=hashtag
+                else
+                    li No HashTags.
             hr

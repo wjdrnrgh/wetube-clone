@@ -9,15 +9,19 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: false },
   name: { type: String, required: true },
   location: { type: String },
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
   //Github
   githubLogin: { type: Boolean, default: false },
   avatarUrl: { type: String },
 });
 
 userSchema.pre("save", async function () {
-  console.log(`Before Password : ${this.password}`); //암호화 전
-  this.password = await bcrypt.hash(this.password, 5);
-  console.log(`After Password : ${this.password}`); //암호화 후
+  if (this.isModified("password")) {
+    //userSchema property 중 password 영역이 수정된 경우에만 hash 진행
+    console.log(`Before Password : ${this.password}`); //암호화 전
+    this.password = await bcrypt.hash(this.password, 5);
+    console.log(`After Password : ${this.password}`); //암호화 후
+  }
 });
 
 const User = mongoose.model("User", userSchema);

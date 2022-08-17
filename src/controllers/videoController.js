@@ -1,6 +1,6 @@
 //database video model
 import Video from "../models/Video";
-
+import User from "../models/User";
 //root
 export const home = async (req, res) => {
   //callback 방식이 아닌 promise 방식
@@ -38,9 +38,15 @@ export const search = async (req, res) => {
 
 export const getEdit = async (req, res) => {
   const { id } = req.params;
+  const {
+    user: { _id },
+  } = req.session;
   const video = await Video.findById(id);
   if (video === null) {
     return res.render("404", { pageTitle: "Video Not Found" });
+  }
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
   }
   return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
 };
@@ -51,6 +57,16 @@ export const getUpload = (req, res) => {
 
 export const deleteVideo = async (req, res) => {
   const { id } = req.params;
+  const {
+    user: { _id },
+  } = req.session;
+  const video = Video.findById(id);
+  if (!video) {
+    return res.status(404).render("404", { pageTitle: "Video Not Found" });
+  }
+  if (String(video.owner) !== String(_id)) {
+    return res.status(403).redirect("/");
+  }
   await Video.findByIdAndDelete(id);
   return res.redirect("/");
 };
@@ -60,10 +76,17 @@ export const deleteVideo = async (req, res) => {
 
 export const postEdit = async (req, res) => {
   const { id } = req.params; //req 인자가 포함하는 정보 중 id 값을 추출
+  const {
+    user: { _id },
+  } = req.session;
   const { title, description, hashtags } = req.body; //req 인자가 포함하는 정보 중  form 태그 내 body 값을 추출
-  const video = await Video.exists({ _id: id });
-  if (video === null) {
+  const video = await Video.findById(id);
+  if (!video) {
     return res.status(404).render("404", { pageTitle: "Video Not Found" });
+  }
+  if (String(video.owner) !== String(_id)) {
+    //해당 영상의 owner 와 현재 session의 id를 비교하여 일치하지 않을 시 강제 redirect
+    return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
     title,
@@ -80,7 +103,7 @@ export const postUpload = async (req, res) => {
   const file = req.file;
   const { title, description, hashtags } = req.body;
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       //Promise 함수를 사용하여 생성한 비디오 데이터가 database에 저장될 때 까지 기다린다.
       title: title,
       description: description,
@@ -88,6 +111,10 @@ export const postUpload = async (req, res) => {
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });
+    //user model update
+    const user = await User.findById(_id);
+    user.videos.push(newVideo._id);
+    user.save();
   } catch (error) {
     return res.status(400).render("upload", {
       pageTitle: "Upload Video",

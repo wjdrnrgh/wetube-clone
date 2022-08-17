@@ -10,6 +10,7 @@ block content
             a(href=`/users/${video.owner._id}`)=video.owner.name
     if user
         if String(video.owner._id) === String(user._id)
+            hr(style="margin:10px 0 10px 0")
             a(href=`${video.id}/edit`) Edit Video &rarr;
             br
             a(href=`${video.id}/delete`) Delete Video &rarr;
