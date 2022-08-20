@@ -51,8 +51,10 @@ app.use((req, res, next) => {
 
 //Router
 app.use("/", rootRouter);
-app.use("/uploads", express.static("uploads"));
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+//Source Dir
+app.use("/uploads", express.static("uploads"));
+app.use("/assets", express.static("assets"));
 
 export default app;
