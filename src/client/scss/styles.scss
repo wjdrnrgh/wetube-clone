@@ -1,5 +1,32 @@
-@import "./_variables.scss";
+//  Config
+@import "./config/_variables.scss";
+@import "./config/reset.scss";
+//  Componets
+@import "./components/header.scss";
+@import "./components/footer.scss";
+@import "./components/video.scss";
 
+//  Screens
+
+//  Defaults
+
+@font-face {
+  font-family: "PretendardVar";
+  src: url("../../font/PretendardVariable.ttf");
+}
+* {
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
 body {
-  background-color: $bg-color;
+  font-family: "PretendardVar";
+  background-color: $yt-bgcolor;
+  color: #ffffff;
+}
+
+main {
+  margin-top: 56px;
 }

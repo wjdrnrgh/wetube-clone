@@ -1,0 +1,27 @@
+header 
+    div#logo__box.header__box
+        a(href="/").yt__logo
+            i.fa-brands.fa-youtube
+            span Wetube
+    div#search__box.header__box
+        form(method="get")#header__search
+            input(type="text" placeholder="검색")
+        button#search__btn.fa-solid.fa-magnifying-glass
+    nav
+        ul.nav__list
+            if loggedIn
+                li
+                    a(href="/users/edit") Edit Profile
+                li 
+                    a(href=`/users/${user._id}`) My Profile
+                li 
+                    a(href="/users/logout") Logout
+                li 
+                    a(href="/videos/upload") Upload Video
+            else
+                li 
+                    a(href="/join") Join
+                li 
+                    a(href="/login") Login                        
+                li
+                    a(href="/search") Search

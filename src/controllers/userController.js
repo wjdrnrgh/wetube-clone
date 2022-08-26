@@ -227,7 +227,9 @@ export const getChangePassword = (req, res) => {
   if (req.session.user.githubLogin === true) {
     return res.redirect("/");
   }
-  return res.render("change-password", { pageTitle: "Change Password" });
+  return res.render("users/change-password", {
+    pageTitle: "Change Password",
+  });
 };
 export const postChangePassword = async (req, res) => {
   // send notification
@@ -243,13 +245,13 @@ export const postChangePassword = async (req, res) => {
   const user = await User.findById(_id);
   const verification = await bcrypt.compare(oldPassword, user.password);
   if (!verification) {
-    return res.status(400).render("change-password", {
+    return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
       errorMessage: "기존 비밀번호가 일치하지 않습니다.",
     });
   }
   if (newPassword !== confirmPassword) {
-    return res.status(400).render("change-password", {
+    return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
       errorMessage: "신규 비밀번호가 일치하지 않습니다.",
     });
@@ -274,5 +276,5 @@ export const profile = async (req, res) => {
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User Not Found" });
   }
-  return res.render("profile", { pageTitle: user.name, user });
+  return res.render("users/profile", { pageTitle: user.name, user });
 };

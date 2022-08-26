@@ -1,0 +1,10 @@
+extends ../layout.pug 
+include ../mixins/video
+
+block content
+    ul
+        each video in user.videos
+            +video(video)
+        else
+            li
+                h1 Nothing Fond.
