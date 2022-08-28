@@ -1,14 +1,19 @@
 header 
     div#logo__box.header__box
-        a(href="/").yt__logo
+        a(href="/").header__logo
             i.fa-brands.fa-youtube
             span Wetube
     div#search__box.header__box
-        form(method="get")#header__search
-            input(type="text" placeholder="검색")
-        button#search__btn.fa-solid.fa-magnifying-glass
+        form#search__form(method="GET" action="/search")
+            input(name="keyword" placeholder="Search By Video Title")
+            //input(type="submit" value="Search")
+            button(type="submit") 
+                i.fas.fa-search
     nav
         ul.nav__list
+            //li 
+                a(href="/search") 
+                    i.fas.fa-search
             if loggedIn
                 li
                     a(href="/users/edit") Edit Profile
@@ -20,8 +25,6 @@ header
                     a(href="/videos/upload") Upload Video
             else
                 li 
-                    a(href="/join") Join
+                    a(href="/login") Login
                 li 
-                    a(href="/login") Login                        
-                li
-                    a(href="/search") Search
+                    a(href="/join").header__btn Join

@@ -4,8 +4,11 @@ import User from "../models/User";
 //root
 export const home = async (req, res) => {
   //callback 방식이 아닌 promise 방식
-  const videos = await Video.find({}).sort({ createdAt: "desc" }); //비디오 모델 내 모든 오브젝트를 찾고, 정렬
+  const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner"); //비디오 모델 내 모든 오브젝트를 찾고, 정렬 and 비디오 소유주 정보 get
   //await = database 내에서 비디오를 찾는 과정에 대한 응답을 기다린다, 응답이 올 때까지 해당 줄에서 대기
+  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos }); //2번째 인수는 해당 파일에 보낼 변수
 };
 

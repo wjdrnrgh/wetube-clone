@@ -1,0 +1,30 @@
+.all__videos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.empty__message {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.garbage__box {
+  height: 5px;
+}
+.video__subTxt {
+  font-size: small;
+  color: $yt-sub-text;
+}
+
+#video__hashtags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  li {
+    margin-right: 5px;
+  }
+}

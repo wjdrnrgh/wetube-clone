@@ -1,15 +1,19 @@
 //  Config
 @import "./config/_variables.scss";
 @import "./config/reset.scss";
+
 //  Componets
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/video.scss";
+@import "./components/find-video.scss";
+@import "./components/shared.scss";
 
 //  Screens
+@import "./screens/home.scss";
+@import "./screens/search.scss";
 
 //  Defaults
-
 @font-face {
   font-family: "PretendardVar";
   src: url("../../font/PretendardVariable.ttf");
@@ -28,5 +32,7 @@ body {
 }
 
 main {
-  margin-top: 56px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 50px auto 50px auto;
 }

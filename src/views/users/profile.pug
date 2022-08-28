@@ -2,9 +2,8 @@ extends ../layout.pug
 include ../mixins/video
 
 block content
-    ul
+    div.all__videos
         each video in user.videos
             +video(video)
         else
-            li
-                h1 Nothing Fond.
+            h1.empty__message Nothing Fond.

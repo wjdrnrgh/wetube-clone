@@ -1,10 +1,9 @@
 extends layout.pug 
-include mixins/video
+include mixins/find-video
 
 block content
-    form(method="GET")
-        input(name="keyword" placeholder="Search By Video Title")
-        input(type="submit" value="Search")
-    div
+    div.find__videos
         each video in videos
-            +video(video)
+            +find-video(video)
+        else
+            h1.empty__message Nothing Found.

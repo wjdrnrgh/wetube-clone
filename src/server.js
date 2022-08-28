@@ -56,5 +56,4 @@ app.use("/videos", videoRouter);
 //Source Dir
 app.use("/uploads", express.static("uploads"));
 app.use("/assets", express.static("assets"));
-
 export default app;
