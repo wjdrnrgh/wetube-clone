@@ -1,0 +1,36 @@
+.form__st {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $yt-bgcolor;
+  input {
+    font-family: "PretendardVar";
+    all: unset;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: $yt-border-solid;
+    background-color: transparent;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #ffffff;
+    width: 40%;
+    transition: all 0.2s linear;
+    &:focus {
+      border: 1px solid #ffffff;
+      &::placeholder {
+        font-weight: 900;
+        color: #ffffff;
+      }
+    }
+  }
+  input[type="submit"] {
+    font-weight: 900;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #ffffff;
+      color: $yt-channel-bg;
+    }
+  }
+}

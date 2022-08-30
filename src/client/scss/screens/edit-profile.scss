@@ -1,0 +1,32 @@
+.avatar__box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+  .avatar__img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: $yt-navcolor;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  label[for="avatar"] {
+    position: absolute;
+    bottom: 10px;
+    background-color: $yt-bgcolor;
+    color: #ffffff;
+    padding: 5px 30px;
+    border-radius: 5px;
+    border: $yt-border-solid;
+    cursor: pointer;
+    transition: all 0.2s linear;
+    &:hover {
+      font-weight: 900;
+      color: $yt-bgcolor;
+      background-color: #ffffff;
+    }
+  }
+}

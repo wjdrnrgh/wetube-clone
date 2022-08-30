@@ -2,8 +2,9 @@ extends layout.pug
 include mixins/video
 
 block content
-    div.all__videos
-        each video in videos
-            +video(video)
-        else
-            h1.empty__message Nothing Found.
+    div.content__wrap
+        div.all__videos
+            each video in videos
+                +video(video)
+            else
+                h1.empty__message Nothing Found.

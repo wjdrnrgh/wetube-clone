@@ -1,16 +1,17 @@
 extends layout.pug
 
 block content 
-    video(src="../"+video.fileUrl controls=true) 
-    div 
-        p=video.description
-        small=video.createdAt
-    div 
-        small  Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
-    if user
-        if String(video.owner._id) === String(user._id)
-            hr(style="margin:10px 0 10px 0")
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
+    div.content__wrap
+        video(src="../"+video.fileUrl controls=true) 
+        div 
+            p=video.description
+            small=video.createdAt
+        div 
+            small  Uploaded by 
+                a(href=`/users/${video.owner._id}`)=video.owner.name
+        if user
+            if String(video.owner._id) === String(user._id)
+                hr(style="margin:10px 0 10px 0")
+                a(href=`${video.id}/edit`) Edit Video &rarr;
+                br
+                a(href=`${video.id}/delete`) Delete Video &rarr;

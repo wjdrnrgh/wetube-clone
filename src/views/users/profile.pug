@@ -2,8 +2,22 @@ extends ../layout.pug
 include ../mixins/video
 
 block content
-    div.all__videos
-        each video in user.videos
-            +video(video)
-        else
-            h1.empty__message Nothing Fond.
+    div.channel__container
+        div.channel__info 
+            div.channel__title
+                if user.avatarUrl
+                    img(src=user.avatarUrl, alt="avatar")
+                else
+                    div.none__avatar
+                        i.fa-solid.fa-user
+                div.garbage__box__s
+                h1#channel__title=user.name
+                div.garbage__box__s
+                p.video__subTxt 구독자 없음
+            //div.channel__tabs
+        div.content__wrap
+            div.all__videos
+                each video in user.videos
+                    +video(video)
+                else
+                    h1.empty__message Nothing Fond.

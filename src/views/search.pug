@@ -2,8 +2,9 @@ extends layout.pug
 include mixins/find-video
 
 block content
-    div.find__videos
-        each video in videos
-            +find-video(video)
-        else
-            h1.empty__message Nothing Found.
+    div.content__wrap
+        div.find__videos
+            each video in videos
+                +find-video(video)
+            else
+                h1.empty__message Nothing Found.

@@ -66,3 +66,15 @@ header {
     border-radius: 5px;
   }
 }
+
+@media (max-width: 800px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    #logo__box,
+    #search__box {
+      margin-bottom: 20px;
+    }
+  }
+}

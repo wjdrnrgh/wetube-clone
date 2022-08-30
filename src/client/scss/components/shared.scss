@@ -1,3 +1,10 @@
+.content__wrap {
+  max-width: 1200px;
+  width: 100%;
+  min-height: 600px;
+  margin: 50px auto 50px auto;
+}
+
 .all__videos {
   display: flex;
   flex-direction: row;
@@ -11,8 +18,14 @@
   text-align: center;
 }
 
-.garbage__box {
+.garbage__box__s {
   height: 5px;
+}
+.garbage__box__m {
+  height: 10px;
+}
+.garbage__box__l {
+  height: 15px;
 }
 .video__subTxt {
   font-size: small;
@@ -26,5 +39,13 @@
   align-items: center;
   li {
     margin-right: 5px;
+  }
+}
+
+.guide__anchor {
+  margin-top: 20px;
+  h1 {
+    font-size: 1.2rem;
+    text-align: center;
   }
 }

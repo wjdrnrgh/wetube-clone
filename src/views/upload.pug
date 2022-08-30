@@ -1,12 +1,17 @@
 extends layout.pug
 
 block content
-    if errorMessage 
-        h3=errorMessage
-    form(method="POST" action="" enctype="multipart/form-data") 
-        label(for="video") Video File
-        input(type="file", name="video" accept="video/*" requried id="video")
-        input(name="title" placeHolder="Title" requried type="text" maxlength=80)
-        input(name="description" placeHolder="Description" requried type="text" minlength=5)
-        input(name="hashtags" placeHolder="Hashtags, separated by comma." requried type="text")
-        input(value="Upload" type="submit")
+    div.content__wrap
+        if errorMessage 
+            h3=errorMessage
+        form.form__st(method="POST" action="" enctype="multipart/form-data") 
+            label(for="video") Video File
+            input(type="file", name="video" accept="video/*" requried id="video")
+            div.garbage__box__l
+            input(name="title" placeHolder="Title" requried type="text" maxlength=80)
+            div.garbage__box__l
+            input(name="description" placeHolder="Description" requried type="text" minlength=5)
+            div.garbage__box__l
+            input(name="hashtags" placeHolder="Hashtags, separated by comma." requried type="text")
+            div.garbage__box__l
+            input(value="Upload" type="submit")

@@ -8,10 +8,15 @@
 @import "./components/video.scss";
 @import "./components/find-video.scss";
 @import "./components/shared.scss";
+@import "./components/forms.scss";
 
 //  Screens
 @import "./screens/home.scss";
 @import "./screens/search.scss";
+@import "./screens/profile.scss";
+@import "./screens/watch.scss";
+@import "./screens/login.scss";
+@import "./screens/edit-profile.scss";
 
 //  Defaults
 @font-face {
@@ -31,8 +36,10 @@ body {
   color: #ffffff;
 }
 
+/*
 main {
   max-width: 1200px;
   width: 100%;
   margin: 50px auto 50px auto;
 }
+*/

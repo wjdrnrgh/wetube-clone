@@ -1,23 +1,31 @@
 extends layout.pug
 
 block content
-    if errorMessage
-        h3=errorMessage
-    if user.avatarUrl
-        if user.avatarUrl.includes("githubuser")
-            img(src=user.avatarUrl, alt="avatar" width="100" height="100" style="border-radius:50%")
-        else
-            img(src="/"+user.avatarUrl, alt="avatar" width="100" height="100" style="border-radius:50%")
-    else 
-        span= "등록된 프로필 이미지가 없습니다."
-    form(method="POST" enctype="multipart/form-data")
-        label(for="avatar") Avatar
-        input(type="file" id="avatar" name="avatar" accept="image/*")
-        input(name="name" type="text" placeholder="Name" value=user.name)
-        input(name="email" type="email" placeholder="Email" value=user.email)
-        input(name="username" type="text" placeholder="Username" value=user.username)
-        input(name="location" type="text" placeholder="Location" value=user.location)
-        input(type="submit", value="Update Profile")
-        if !user.githubLogin
-            hr
-            a(href="change-password") Change Password &rarr;
+    div.content__wrap
+        if errorMessage
+            h3=errorMessage
+        form.form__st(method="POST" enctype="multipart/form-data")
+            div.avatar__box
+                if user.avatarUrl
+                    if user.avatarUrl.includes("githubuser")
+                        img.avatar__img(src=user.avatarUrl, alt="avatar")
+                    else
+                        img.avatar__img(src="/"+user.avatarUrl, alt="avatar")
+                else 
+                    img.avatar__img(src="/uploads/imgs/profile-icon.png", alt="avatar")
+                label(for="avatar") Edit 
+                    i.fa-solid.fa-pen-to-square
+                input(type="file" id="avatar" name="avatar" accept="image/*")
+            input(name="name" type="text" placeholder="Name" value=user.name)
+            div.garbage__box__l
+            input(name="email" type="email" placeholder="Email" value=user.email)
+            div.garbage__box__l
+            input(name="username" type="text" placeholder="Username" value=user.username)
+            div.garbage__box__l
+            input(name="location" type="text" placeholder="Location" value=user.location)
+            div.garbage__box__l
+            input(type="submit", value="Update Profile")
+            if !user.githubLogin
+                div.guide__anchor
+                    h1
+                        a(href="change-password") Change Password &rarr;
