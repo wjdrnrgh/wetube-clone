@@ -1,0 +1,29 @@
+.upload__btn {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: $yt-navcolor;
+  margin-bottom: 30px;
+  transition: all 0.2s linear;
+  i {
+    font-size: 3.5rem;
+  }
+  span {
+    position: absolute;
+    bottom: 20px;
+    font-size: 20px;
+    font-weight: 900;
+  }
+  &:hover {
+    background-color: #ffffff;
+    color: $yt-bgcolor;
+  }
+}
+input[type="file"] {
+  display: none;
+}

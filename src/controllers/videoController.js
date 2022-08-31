@@ -16,7 +16,6 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner");
-  console.log(video);
   if (video === null) {
     return res.render("404", { pageTitle: "Video Not Found" });
   }
@@ -33,7 +32,7 @@ export const search = async (req, res) => {
         //정규식을 사용하여 제목에 keyword를 포함하는 영상을 찾을 것
         $regex: new RegExp(keyword, "i"), // "i" = 입력된 값을 대소문자 구분 없이한다.
       },
-    });
+    }).populate("owner");
   }
   res.render("search", { pageTitle: "Search", videos });
 };

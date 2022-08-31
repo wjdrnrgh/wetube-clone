@@ -272,7 +272,19 @@ export const logout = (req, res) => {
 
 export const profile = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).populate("videos");
+  /*
+    one populate
+    const user = await User.findById(id).populate("videos");
+    기존에 사용하던 코드 But Profile Template 에서 비디오 소유주 정보를 불러올 수 없었음
+  */
+  //double populate
+  const user = await User.findById(id).populate({
+    path: "videos", //가장 먼저 populate 할 내용
+    populate: {
+      //두번째로 populate 할 내용
+      path: "owner",
+    },
+  });
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User Not Found" });
   }

@@ -4,6 +4,13 @@
   justify-content: center;
   align-items: center;
   background-color: $yt-bgcolor;
+  .form__title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #ffffff;
+  }
   input {
     font-family: "PretendardVar";
     all: unset;

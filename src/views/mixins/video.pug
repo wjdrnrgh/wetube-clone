@@ -5,15 +5,14 @@ mixin video(video)
             div.video__info
                 h3#video__title
                     a(href=`/videos/${video.id}`)=video.title
-                //p.video__subTxt=video.description
                 a(href=`/users/${String(video.owner._id)}`).video__subTxt=video.owner.name
-                div.garbage__box
+                div.garbage__box__s
                 ul#video__hashtags
                     each hashtag in video.hashtags
                         li.video__subTxt=hashtag
                     else
                         li.video__subTxt No HashTags.
-                div.garbage__box
+                div.garbage__box__s
                 //p.video__subTxt=video.createdAt
-                div.garbage__box
+                div.garbage__box__s
                 p.video__subTxt 조회수 #{video.meta.views}회

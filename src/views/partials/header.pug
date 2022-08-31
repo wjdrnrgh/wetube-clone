@@ -11,18 +11,23 @@ header
                 i.fas.fa-search
     nav
         ul.nav__list
-            //li 
-                a(href="/search") 
-                    i.fas.fa-search
             if loggedIn
                 li
                     a(href="/users/edit") Edit Profile
                 li 
-                    a(href=`/users/${user._id}`) My Profile
-                li 
                     a(href="/users/logout") Logout
                 li 
                     a(href="/videos/upload") Upload Video
+                li 
+                    a(href=`/users/${user._id}`)
+                        if user.avatarUrl
+                            if user.avatarUrl.includes("githubuser")
+                                img.header__profile(src=user.avatarUrl, alt="avatar")
+                            else
+                                img.header__profile(src="/"+user.avatarUrl, alt="avatar")
+                        else
+                            div.none__profile
+                                i.fa-solid.fa-user
             else
                 li 
                     a(href="/login") Login

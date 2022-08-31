@@ -3,6 +3,7 @@
   width: 100%;
   min-height: 600px;
   margin: 50px auto 50px auto;
+  padding: 0 20px;
 }
 
 .all__videos {
@@ -27,6 +28,10 @@
 .garbage__box__l {
   height: 15px;
 }
+.video__mainTxt {
+  font-size: 20px;
+  font-weight: 900;
+}
 .video__subTxt {
   font-size: small;
   color: $yt-sub-text;
@@ -39,6 +44,7 @@
   align-items: center;
   li {
     margin-right: 5px;
+    color: $yt-link;
   }
 }
 

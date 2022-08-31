@@ -2,16 +2,36 @@ extends layout.pug
 
 block content 
     div.content__wrap
-        video(src="../"+video.fileUrl controls=true) 
-        div 
-            p=video.description
-            small=video.createdAt
-        div 
-            small  Uploaded by 
-                a(href=`/users/${video.owner._id}`)=video.owner.name
+        video#watch__video(src="../"+video.fileUrl controls=true) 
+        div.watch__info
+            ul#video__hashtags.video__subTxt
+                each hashtag in video.hashtags
+                    li=hashtag
+            div.garbage__box__l
+            h1.video__mainTxt=video.title
+            div.garbage__box__s
+            p.video__subTxt=video.description
+            div.garbage__box__s
+            p.video__subTxt=video.createdAt
+            div.garbage__box__s
+            div.video__owner
+                div.owner__info
+                    a.channel__anchor(href=`/users/${video.owner._id}`) 
+                        if video.owner.avatarUrl
+                            if video.owner.avatarUrl.includes("githubuser")
+                                img.avatar__img(src=video.owner.avatarUrl, alt="avatar")
+                            else
+                                img.avatar__img(src="/"+video.owner.avatarUrl, alt="avatar")
+                        else
+                            div.none__avatar
+                                i.fa-solid.fa-user
+                    a.channel__anchor(href=`/users/${video.owner._id}`)=video.owner.name
+                div.owner__subscription
+                    form(action="" method="")
+                        button.subscription__btn 구독
+                        button.subscription__btn 알림
         if user
             if String(video.owner._id) === String(user._id)
-                hr(style="margin:10px 0 10px 0")
-                a(href=`${video.id}/edit`) Edit Video &rarr;
-                br
-                a(href=`${video.id}/delete`) Delete Video &rarr;
+                div.watch__edit
+                    a(href=`${video.id}/edit`) Edit Video &rarr;
+                    a(href=`${video.id}/delete`) Delete Video &rarr;

@@ -5,7 +5,10 @@ block content
         if errorMessage 
             h3=errorMessage
         form.form__st(method="POST" action="" enctype="multipart/form-data") 
-            label(for="video") Video File
+            label.upload__btn(for="video")
+                i.fa-solid.fa-arrow-up-from-bracket
+                div.garbage__box__m
+                span Select
             input(type="file", name="video" accept="video/*" requried id="video")
             div.garbage__box__l
             input(name="title" placeHolder="Title" requried type="text" maxlength=80)

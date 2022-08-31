@@ -1,9 +1,12 @@
 extends layout.pug
 
 block content
-    h4 Change Title of video
-    form(action ="" method="POST")
-        input(name="title" placeholder="Video Title" value=video.title required)
-        input(name="description" placeHolder="Description" requried type="text" minlength=20 value=video.description)
-        input(name="hashtags" placeHolder="Hashtags, separated by comma." requried type="text" value=video.hashtags.join())
-        input(value="Save", type="submit")
+    div.content__wrap
+        form.form__st(action ="" method="POST")
+            input(name="title" placeholder="Video Title" value=video.title required)
+            div.garbage__box__l
+            input(name="description" placeHolder="Description" requried type="text" minlength=20 value=video.description)
+            div.garbage__box__l
+            input(name="hashtags" placeHolder="Hashtags, separated by comma." requried type="text" value=video.hashtags.join())
+            div.garbage__box__l
+            input(value="Video Update", type="submit")
