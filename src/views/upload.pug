@@ -2,9 +2,10 @@ extends layout.pug
 
 block content
     div.content__wrap
-        if errorMessage 
-            h3=errorMessage
         form.form__st(method="POST" action="" enctype="multipart/form-data") 
+            if errorMessage 
+                h3.error__message=errorMessage
+                div.garbage__box__l
             label.upload__btn(for="video")
                 i.fa-solid.fa-arrow-up-from-bracket
                 div.garbage__box__m

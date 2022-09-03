@@ -2,9 +2,10 @@ extends layout.pug
 
 block content
     div.content__wrap
-        if errorMessage
-            h3=errorMessage
         form.form__st(method="POST" enctype="multipart/form-data")
+            if errorMessage
+                h3.error__message=errorMessage
+                div.garbage__box__l
             div.avatar__box
                 if user.avatarUrl
                     if user.avatarUrl.includes("githubuser")

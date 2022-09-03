@@ -2,9 +2,10 @@ extends layout.pug
 
 block content
     div.content__wrap
-        if errorMessage
-            h3=errorMessage
         form.form__st(method="POST")
+            if errorMessage
+                h3.error__message=errorMessage
+                div.garbage__box__l
             input(name="username" type="text" required placeholder="Username")
             div.garbage__box__l
             input(name="password" type="password" required placeholder="Password")
