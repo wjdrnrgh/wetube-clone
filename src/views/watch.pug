@@ -4,18 +4,25 @@ block content
     div.content__wrap
         div#videoContainer
             video#watch__video(src="../"+video.fileUrl controls=false) 
-            div
-                button#play Play
-                button#mute Mute
-                input#volume(type="range", name="", step="0.1", min="0", max="1", value="0.5")
-                div
-                    span#currentTime 00:00
-                    span  / 
-                    span#totalTime 00:00
-                div 
-                    input(type="range", name="", step="0.1", min="0", value="0" )#timeLine
-                div
-                    button#fullScreen Full Screen
+            div#videoControls
+                div#controlsTop
+                    input#timeLine(type="range", name="", step="0.1", min="0", value="0" )
+                div#controlsBottom
+                    div#controlsLeft
+                        button#play
+                            i.fa-solid.fa-play
+                            //i.fa-solid.fa-pause
+                        button#mute
+                            i.fa-solid.fa-volume
+                            //i.fa-solid.fa-volume-slash
+                        input#volume(type="range", name="", step="0.1", min="0", max="1", value="0.5")
+                        div#timeWrap
+                            span#currentTime 00:00
+                            span  / 
+                            span#totalTime 00:00
+                    div#controlsRight
+                        button#fullScreen
+                            i.fa-solid.fa-expand
         div.watch__info
             ul#video__hashtags.video__subTxt
                 each hashtag in video.hashtags

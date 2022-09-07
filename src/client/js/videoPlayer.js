@@ -1,5 +1,3 @@
-console.log("im videoPlayer.js");
-
 const video = document.getElementById("watch__video");
 const playBtn = document.getElementById("play");
 const muteBtn = document.getElementById("mute");
@@ -9,8 +7,11 @@ const totalTime = document.getElementById("totalTime");
 const timeLine = document.getElementById("timeLine");
 const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
+const videoControls = document.getElementById("videoControls");
 
 let volumeValue = 0.5; //input[type = "range"]의 defaluts value 값과 동일하게 설정
+let controlsTimeout = null; //timeoutFunction ID 공유를 위한 변수
+let controlsMovementTimeout = null; //mouse 움직임에 대한 정보를 공유를 위한 변수
 video.volume = volumeValue;
 
 //Video Play And Pause
@@ -93,11 +94,42 @@ const handleFullScreen = () => {
   }
 };
 
+//Video Controller Animation
+const hideController = () => {
+  videoControls.classList.remove("showing");
+};
+
+const handleMouseMove = () => {
+  if (controlsTimeout) {
+    //비디오 영역에 마우스 포인터가 진입했을 때 실행중인 timeout function이 있는지 확인 및 초기화
+    clearTimeout(controlsTimeout);
+    controlsTimeout = null;
+  }
+  if (controlsMovementTimeout) {
+    //비디오 영역에 마우스 포인터가 진입하고 움직일 때마다 실행 될 영역
+    //마우스 포인터가 계속해서 움직이면 timeout 함수 취소 및 재생성을 반복하여 클래스가 유지되도록 한다.
+    //마우스 포인터가 멈출 경우 이미 생성된  timeout 함수가 취소되지 않고 그대로 이행되어 컨트롤러를 숨기게 한다.
+    clearTimeout(controlsMovementTimeout);
+    controlsMovementTimeout = null;
+  }
+  videoControls.classList.add("showing");
+  //mouseMove 함수 마지막 줄에 timeout 을 두어 마우스가 움직이지 않을 때 timeout 되도록 한다.
+  controlsMovementTimeout = setTimeout(hideController, 3000);
+};
+const handleMouseLeave = () => {
+  controlsTimeout = setTimeout(hideController, 3000);
+};
+
 //Event Listener
+//  Btn Event
 playBtn.addEventListener("click", handlePlay);
 muteBtn.addEventListener("click", handleMute);
+fullScreenBtn.addEventListener("click", handleFullScreen);
+//  Input Event
 volumeRange.addEventListener("input", handleVolumeChange);
+timeLine.addEventListener("input", handleTimeLine);
+//  Video Event
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
-timeLine.addEventListener("input", handleTimeLine);
-fullScreenBtn.addEventListener("click", handleFullScreen);
+video.addEventListener("mousemove", handleMouseMove);
+video.addEventListener("mouseleave", handleMouseLeave);

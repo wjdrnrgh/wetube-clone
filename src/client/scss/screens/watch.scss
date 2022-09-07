@@ -1,6 +1,58 @@
-#watch__video {
-  width: 100%;
+#videoContainer {
+  position: relative;
+  #watch__video {
+    width: 100%;
+  }
+  #videoControls {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    padding: 0 10px;
+    input[type="range"] {
+      cursor: pointer;
+      /*
+      &::-webkit-slider-thumb {
+      }
+      &::-webkit-slider-thumb:hover {
+      }
+      */
+    }
+    button {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 100%;
+      border: none;
+      background-color: transparent;
+      padding: 0 5px;
+      i {
+        color: #ffffff;
+        font-size: 1.5rem;
+      }
+    }
+    #controlsTop {
+      #timeLine {
+        width: 100%;
+      }
+    }
+    #controlsBottom {
+      display: flex;
+      height: 48px;
+      #controlsLeft {
+        display: flex;
+        flex: 1;
+        flex-direction: row;
+        align-items: center;
+        #timeWrap {
+          padding: 0 5px;
+        }
+      }
+    }
+  }
 }
+
 .watch__info {
   margin-top: 20px;
   display: flex;
