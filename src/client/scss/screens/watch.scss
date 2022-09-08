@@ -1,13 +1,22 @@
+.showing {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 #videoContainer {
   position: relative;
   #watch__video {
     width: 100%;
+    height: 100%;
   }
   #videoControls {
     position: absolute;
     bottom: 10px;
     width: 100%;
     padding: 0 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
     input[type="range"] {
       cursor: pointer;
       /*
@@ -47,6 +56,9 @@
         align-items: center;
         #timeWrap {
           padding: 0 5px;
+          span {
+            cursor: default;
+          }
         }
       }
     }

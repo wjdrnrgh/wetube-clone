@@ -1,11 +1,14 @@
 const video = document.getElementById("watch__video");
 const playBtn = document.getElementById("play");
+const playBtnIcon = document.querySelector("#play > i");
 const muteBtn = document.getElementById("mute");
+const muteBtnIcon = document.querySelector("#mute > i");
 const volumeRange = document.getElementById("volume");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const timeLine = document.getElementById("timeLine");
 const fullScreenBtn = document.getElementById("fullScreen");
+const fullScreenBtnIcon = document.querySelector("#fullScreen > i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
@@ -20,20 +23,27 @@ const handlePlay = () => {
   if (video.paused) {
     //video.paused = 미디어의 현재 상태값을 true or false 로 반환
     video.play();
+    playBtnIcon.classList.add("bi-pause-fill");
+    playBtnIcon.classList.remove("bi-play-fill");
   } else {
     video.pause();
+    playBtnIcon.classList.add("bi-play-fill");
+    playBtnIcon.classList.remove("bi-pause-fill");
   }
-  playBtn.innerText = video.paused ? "Play" : "Pause";
 };
 
 //Video Mute And UnMute, Volume Range Controll
 const handleMute = () => {
+  //muteBtnIcon.classList.remove("bi-volume-up-fill");
   if (video.muted) {
     video.muted = false;
+    muteBtnIcon.classList.add("bi-volume-up-fill");
+    muteBtnIcon.classList.remove("bi-volume-mute-fill");
   } else {
     video.muted = true;
+    muteBtnIcon.classList.add("bi-volume-mute-fill");
+    muteBtnIcon.classList.remove("bi-volume-up-fill");
   }
-  muteBtn.innerText = video.muted ? "UnMute" : "Mute";
   volumeRange.value = video.muted ? 0 : volumeValue;
 };
 
@@ -64,7 +74,7 @@ const handleLoadedMetadata = () => {
 const handleTimeUpdate = () => {
   if (video.currentTime == video.duration) {
     //video 진행 시점이 video 영상 길이의 끝에 도달했을 때 playBtn의 상태를 변경하도록 한다.
-    playBtn.innerText = "Play";
+    playBtnIcon.classList.add("bi-play-fill");
   }
   //영상의 진행 시간
   currentTime.innerText = formatTime(Math.floor(video.currentTime));
@@ -86,11 +96,13 @@ const handleFullScreen = () => {
   if (fullScreenCheck) {
     //fullScreen 상태인 element 가 있는 경우
     document.exitFullscreen();
-    fullScreenBtn.innerText = "Full Screen";
+    fullScreenBtnIcon.classList.add("bi-fullscreen");
+    fullScreenBtnIcon.classList.remove("bi-fullscreen-exit");
   } else {
     //fullScreen 상태인 element 가 없는 경우
     videoContainer.requestFullscreen();
-    fullScreenBtn.innerText = "Exit Full Screen";
+    fullScreenBtnIcon.classList.add("bi-fullscreen-exit");
+    fullScreenBtnIcon.classList.remove("bi-fullscreen");
   }
 };
 
