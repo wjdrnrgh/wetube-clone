@@ -2,7 +2,7 @@ extends layout.pug
 
 block content 
     div.content__wrap
-        div#videoContainer
+        div#videoContainer(data-id = video._id)
             video#watch__video(src="../"+video.fileUrl controls=false) 
             div#videoControls
                 div#controlsTop

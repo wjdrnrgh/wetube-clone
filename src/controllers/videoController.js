@@ -32,7 +32,9 @@ export const search = async (req, res) => {
         //정규식을 사용하여 제목에 keyword를 포함하는 영상을 찾을 것
         $regex: new RegExp(keyword, "i"), // "i" = 입력된 값을 대소문자 구분 없이한다.
       },
-    }).populate("owner");
+    })
+      .sort({ createdAt: "desc" })
+      .populate("owner");
   }
   res.render("search", { pageTitle: "Search", videos });
 };
@@ -123,4 +125,16 @@ export const postUpload = async (req, res) => {
     }); //error 발생 시 upload 페이지 rerender하도록 하며, errorMessage를 해당 페이지로 보내 표시하도록 한다.
   }
   return res.redirect("/");
+};
+
+export const registerView = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+  if (!video) {
+    //해당 id 의 비디오를 찾지 못했을 경우 404 코드를 백엔드에 전송
+    return res.sendStatus(404);
+  }
+  video.meta.views = video.meta.views + 1;
+  await video.save();
+  return res.sendStatus(200); // 200 = OK
 };

@@ -12,6 +12,8 @@ const fullScreenBtnIcon = document.querySelector("#fullScreen > i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
+console.log(videoContainer.dataset);
+
 let volumeValue = 0.5; //input[type = "range"]의 defaluts value 값과 동일하게 설정
 let controlsTimeout = null; //timeoutFunction ID 공유를 위한 변수
 let controlsMovementTimeout = null; //mouse 움직임에 대한 정보를 공유를 위한 변수
@@ -132,6 +134,22 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideController, 3000);
 };
 
+const handleKeyPlay = (event) => {
+  if (event.keyCode !== 32) {
+    return;
+  } else {
+    event.preventDefault();
+    handlePlay();
+  }
+};
+
+const handelEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+};
+
 //Event Listener
 //  Btn Event
 playBtn.addEventListener("click", handlePlay);
@@ -143,5 +161,9 @@ timeLine.addEventListener("input", handleTimeLine);
 //  Video Event
 video.addEventListener("loadedmetadata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
-video.addEventListener("mousemove", handleMouseMove);
-video.addEventListener("mouseleave", handleMouseLeave);
+video.addEventListener("click", handlePlay);
+video.addEventListener("ended", handelEnded); //frontEnd <-> backEnd
+videoContainer.addEventListener("mousemove", handleMouseMove);
+videoContainer.addEventListener("mouseleave", handleMouseLeave);
+// Keydown Event
+window.addEventListener("keydown", handleKeyPlay);

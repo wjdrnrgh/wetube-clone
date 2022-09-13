@@ -9,6 +9,7 @@ import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import apiRouter from "./routers/apiRouter";
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/api", apiRouter);
 //Source Dir
 app.use("/uploads", express.static("uploads"));
 app.use("/assets", express.static("assets"));
