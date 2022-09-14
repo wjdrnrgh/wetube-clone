@@ -12,8 +12,6 @@ const fullScreenBtnIcon = document.querySelector("#fullScreen > i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
-console.log(videoContainer.dataset);
-
 let volumeValue = 0.5; //input[type = "range"]의 defaluts value 값과 동일하게 설정
 let controlsTimeout = null; //timeoutFunction ID 공유를 위한 변수
 let controlsMovementTimeout = null; //mouse 움직임에 대한 정보를 공유를 위한 변수

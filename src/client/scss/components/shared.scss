@@ -39,6 +39,9 @@
 .garbage__box__l {
   height: 15px;
 }
+.garbage__box__xl {
+  height: 30px;
+}
 .video__mainTxt {
   font-size: 20px;
   font-weight: 900;
@@ -64,6 +67,24 @@
   h1 {
     font-size: 1.2rem;
     text-align: center;
+  }
+}
+
+.yt__btn {
+  font-family: "PretendardVar";
+  padding: 7.5px 20px;
+  margin: 0 5px;
+  background-color: transparent;
+  color: $yt-link;
+  border: 1px solid $yt-link;
+  border-radius: 2.5px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  &:hover {
+    background-color: $yt-link;
+    color: #ffffff;
   }
 }
 

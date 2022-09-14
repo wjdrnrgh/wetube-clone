@@ -40,16 +40,6 @@ app.use(
 import { localsMiddleware } from "./middlewares";
 app.use(localsMiddleware);
 
-//Session EX
-/*
-app.use((req, res, next) => {
-  req.sessionStore.all((error, ssesions) => {
-    //console.log(ssesions);
-    next();
-  });
-});
-*/
-
 //Router
 app.use("/", rootRouter);
 app.use("/users", userRouter);

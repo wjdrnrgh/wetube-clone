@@ -1,3 +1,81 @@
+.modal__showing {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.recorder__modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  //backdrop-filter: blur(1.5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s linear, visibility 0.3s linear;
+  .recorder__modal__body {
+    display: flex;
+    flex-direction: column;
+    max-width: 950px;
+    width: 100%;
+    height: 800px;
+    background-color: $yt-modal;
+    border-radius: 5px;
+    .modal__header {
+      display: flex;
+      align-items: center;
+      height: 70px;
+      padding: 0px 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      .modal__title {
+        font-size: 1.2rem;
+        font-weight: 900;
+      }
+      #closeBtn {
+        margin-left: auto;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        i {
+          font-size: 1.2rem;
+          color: #ffffff;
+        }
+      }
+    }
+    .modal__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      #preview {
+        border-radius: 5px;
+      }
+    }
+    .modal__footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 60px;
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
+#recorder__wrap {
+  display: flex;
+  margin-bottom: 30px;
+  #modalBtn {
+    margin-left: auto;
+  }
+}
+
 .upload__btn {
   cursor: pointer;
   position: relative;

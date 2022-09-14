@@ -1,7 +1,22 @@
 extends layout.pug
 
 block content
+    div.recorder__modal
+        div.recorder__modal__body
+            div.modal__header
+                h1.modal__title 동영상 촬영
+                button#closeBtn
+                    i.bi.bi-x-lg
+            div.modal__content
+                video#preview
+                div.garbage__box__xl
+                button#startBtn.yt__btn 녹화 시작
+            div.modal__footer
+                p.video__subTxt YouTube에 동영상을 제출하면 YouTube 서비스 약관 및 커뮤니티 가이드에 동의하게 됩니다.
+                p.video__subTxt 불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다. 타인의 저작권 또는 개인정보 보호 권한을 침해해서는 안 됩니다.
     div.content__wrap
+        div#recorder__wrap
+            button#modalBtn.yt__btn 동영상 촬영
         form.form__st(method="POST" action="" enctype="multipart/form-data") 
             if errorMessage 
                 h3.error__message=errorMessage
@@ -19,3 +34,5 @@ block content
             input(name="hashtags" placeHolder="Hashtags, separated by comma." requried type="text")
             div.garbage__box__l
             input(value="Upload" type="submit")
+block scripts
+    script(src="/assets/js/videoRecorder.js") 

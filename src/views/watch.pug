@@ -46,8 +46,8 @@ block content
                     a.channel__anchor(href=`/users/${video.owner._id}`)=video.owner.name
                 div.owner__subscription
                     form(action="" method="")
-                        button.subscription__btn 구독
-                        button.subscription__btn 알림
+                        button.yt__btn 구독
+                        button.yt__btn 알림
         if user
             if String(video.owner._id) === String(user._id)
                 div.watch__edit
