@@ -1,8 +1,10 @@
 mixin find-video(video)
         div.find__video
             div.thumbnail__wrap
-                a(href=`/videos/${video.id}`) 
-                    img#find__thumbnail__img(src="/uploads/imgs/Thumbnail.jpg", alt="Thumbnail")
+                if video.thumbnailUrl
+                    a(href=`/videos/${video.id}`)#find__thumbnail__img(style=`background-image:url(/${video.thumbnailUrl.replaceAll("\\","/")});`)
+                else 
+                    a(href=`/videos/${video.id}`)#find__thumbnail__img(style=`background-image:url(/uploads/imgs/Thumbnail.jpg);`)
             div.find__video__info
                 h3#find__video__title
                     a(href=`/videos/${video.id}`)=video.title

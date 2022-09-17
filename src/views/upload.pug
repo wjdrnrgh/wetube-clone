@@ -10,7 +10,7 @@ block content
             div.modal__content
                 video#preview
                 div.garbage__box__xl
-                button#startBtn.yt__btn 녹화 시작
+                button#actionBtn.yt__btn 녹화 시작
             div.modal__footer
                 p.video__subTxt YouTube에 동영상을 제출하면 YouTube 서비스 약관 및 커뮤니티 가이드에 동의하게 됩니다.
                 p.video__subTxt 불법촬영물 게재시 삭제 조치되고 관련 법에 따라 처벌 받을 수 있습니다. 타인의 저작권 또는 개인정보 보호 권한을 침해해서는 안 됩니다.
@@ -21,12 +21,21 @@ block content
             if errorMessage 
                 h3.error__message=errorMessage
                 div.garbage__box__l
-            label.upload__btn(for="video")
-                i.fa-solid.fa-arrow-up-from-bracket
-                div.garbage__box__m
-                span Select
-            input(type="file", name="video" accept="video/*" requried id="video")
-            div.garbage__box__l
+            div.upload__wrap
+                div.upload__content
+                    label.upload__btn(for="video")
+                        i.fa-solid.fa-arrow-up-from-bracket
+                        div.garbage__box__m
+                        span Video
+                    input(type="file", name="video" accept="video/*" requried id="video")
+                    label.fileName(for="video") 업로드할 파일을 선택해주세요.
+                div.upload__content
+                    label.upload__btn(for="thumbnail")
+                        i.fa-solid.fa-arrow-up-from-bracket
+                        div.garbage__box__m
+                        span Thumbnail
+                    input(type="file", name="thumbnail" accept="image/*" requried id="thumbnail")
+                    label.fileName(for="thumbnail").fileName 업로드할 파일을 선택해주세요.
             input(name="title" placeHolder="Title" requried type="text" maxlength=80)
             div.garbage__box__l
             input(name="description" placeHolder="Description" requried type="text" minlength=5)
@@ -35,4 +44,4 @@ block content
             div.garbage__box__l
             input(value="Upload" type="submit")
 block scripts
-    script(src="/assets/js/videoRecorder.js") 
+    script(src="/assets/js/uploadVideo.js") 

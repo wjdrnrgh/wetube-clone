@@ -12,10 +12,18 @@
   a {
     display: inline-block;
   }
-  #thumbnail__img {
+  #thumbnail__box {
     width: 100%;
     height: 200px;
+    #thumbnail__img {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
   }
+
   .video__info {
     width: 100%;
     margin-top: 10px;

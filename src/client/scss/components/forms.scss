@@ -11,10 +11,11 @@
     padding: 0 0 15px 0;
     border-bottom: 1px solid #ffffff;
   }
-  input {
+  input:not([type="file"]) {
     font-family: "PretendardVar";
     all: unset;
     padding: 15px 20px;
+    box-sizing: border-box;
     border-radius: 5px;
     border: $yt-border-solid;
     background-color: transparent;

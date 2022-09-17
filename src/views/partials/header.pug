@@ -22,9 +22,9 @@ header
                     a(href=`/users/${user._id}`)
                         if user.avatarUrl
                             if user.avatarUrl.includes("githubuser")
-                                img.header__profile(src=user.avatarUrl, alt="avatar")
+                                img.header__profile(src=user.avatarUrl, alt="Profile")
                             else
-                                img.header__profile(src="/"+user.avatarUrl, alt="avatar")
+                                img.header__profile(src="/"+user.avatarUrl, alt="Profile")
                         else
                             div.none__profile
                                 i.fa-solid.fa-user

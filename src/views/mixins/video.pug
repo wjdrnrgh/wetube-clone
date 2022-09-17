@@ -1,7 +1,12 @@
 mixin video(video)
         div.all__video
-            a(href=`/videos/${video.id}`) 
-                img#thumbnail__img(src="/uploads/imgs/Thumbnail.jpg", alt="Thumbnail")
+            div#thumbnail__box
+                if video.thumbnailUrl
+                    //img#thumbnail__img(src="/"+video.thumbnailUrl, alt="Thumbnail")
+                    a(href=`/videos/${video.id}`)#thumbnail__img(style=`background-image:url(/${video.thumbnailUrl.replaceAll("\\","/")});`)
+                else 
+                    //img#thumbnail__img(src="/uploads/imgs/Thumbnail.jpg", alt="Thumbnail")
+                    a(href=`/videos/${video.id}`)#thumbnail__img(style=`background-image:url(/uploads/imgs/Thumbnail.jpg);`)
             div.video__info
                 h3#video__title
                     a(href=`/videos/${video.id}`)=video.title

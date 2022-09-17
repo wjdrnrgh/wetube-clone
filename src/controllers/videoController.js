@@ -55,6 +55,10 @@ export const getEdit = async (req, res) => {
 };
 
 export const getUpload = (req, res) => {
+  //FFmpeg.wasm
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  //
   return res.render("upload", { pageTitle: "Upload Video" });
 };
 
@@ -63,11 +67,12 @@ export const deleteVideo = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const video = Video.findById(id);
+  const video = await Video.findById(id);
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video Not Found" });
   }
   if (String(video.owner) !== String(_id)) {
+    console.log("delete");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
@@ -103,14 +108,15 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const file = req.file;
+  const { video, thumbnail } = req.files;
   const { title, description, hashtags } = req.body;
   try {
     const newVideo = await Video.create({
       //Promise 함수를 사용하여 생성한 비디오 데이터가 database에 저장될 때 까지 기다린다.
       title: title,
       description: description,
-      fileUrl: file.path,
+      fileUrl: video[0].path,
+      thumbnailUrl: thumbnail[0].path,
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });

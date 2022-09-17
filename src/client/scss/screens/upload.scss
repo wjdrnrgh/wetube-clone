@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   z-index: 100;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -75,33 +75,78 @@
     margin-left: auto;
   }
 }
-
-.upload__btn {
-  cursor: pointer;
-  position: relative;
+.upload__wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: $yt-navcolor;
-  margin-bottom: 30px;
-  transition: all 0.2s linear;
-  i {
-    font-size: 3.5rem;
-  }
-  span {
-    position: absolute;
-    bottom: 20px;
-    font-size: 20px;
-    font-weight: 900;
-  }
-  &:hover {
-    background-color: #ffffff;
-    color: $yt-bgcolor;
+  flex-direction: column;
+  width: 40%;
+  .upload__content {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    margin-bottom: 30px;
+    .upload__btn {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 100px;
+      border-radius: 10px;
+      background-color: $yt-navcolor;
+      margin-right: 20px;
+      transition: all 0.2s linear;
+      i {
+        font-size: 1.5rem;
+      }
+      span {
+        position: absolute;
+        bottom: 20px;
+        font-size: 12.5px;
+        font-weight: 900;
+      }
+      &:hover {
+        background-color: #ffffff;
+        color: $yt-bgcolor;
+      }
+    }
+    .fileName {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 600;
+      color: $yt-sub-text;
+      padding-bottom: 5px;
+      border-bottom: 1px solid $yt-sub-text;
+      margin-bottom: 1px;
+      transition: color 0.2s linear, border 0.2s linear;
+      cursor: pointer;
+      &:hover {
+        color: #ffffff;
+        border-bottom: 1px solid #ffffff;
+      }
+    }
+    input[type="file"] {
+      display: none;
+    }
   }
 }
-input[type="file"] {
-  display: none;
+
+@media (max-width: 800px) {
+  .upload__wrap {
+    .upload__content {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .upload__btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 25px;
+      }
+      .fileName {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
 }
