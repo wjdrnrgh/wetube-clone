@@ -18,6 +18,10 @@ let videoFile;
 
 const handleInput = (event) => {
   const fileName = event.target.value;
+  if (!fileName) {
+    event.target.nextSibling.innerText = `업로드할 파일을 선택해주세요.`;
+    return;
+  }
   event.target.nextSibling.innerText = `파일명 : ${fileName}`;
 };
 
@@ -119,7 +123,7 @@ const handleDownload = async () => {
 const init = async () => {
   stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: { width: 800, height: 500 }, //영상 크기 조절 가능
+    video: { width: 900, height: 550 }, //영상 크기 조절 가능
   });
   //카메라로 촬영 된 영상을 담고, 재생
   video.srcObject = stream;

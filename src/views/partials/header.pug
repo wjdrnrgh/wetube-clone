@@ -5,8 +5,7 @@ header
             span Wetube
     div#search__box.header__box
         form#search__form(method="GET" action="/search")
-            input(name="keyword" placeholder="Search By Video Title")
-            //input(type="submit" value="Search")
+            input(name="keyword" placeholder="Search By Video Title" required)
             button(type="submit") 
                 i.fas.fa-search
     nav

@@ -83,19 +83,19 @@
     display: flex;
     flex-direction: row;
     align-items: end;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 30px;
     .upload__btn {
       cursor: pointer;
+      box-sizing: content-box;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 180px;
+      width: 37.5%;
       height: 100px;
       border-radius: 10px;
       background-color: $yt-navcolor;
-      margin-right: 20px;
       transition: all 0.2s linear;
       i {
         font-size: 1.5rem;
@@ -112,9 +112,10 @@
       }
     }
     .fileName {
-      flex: 1;
+      width: 60%;
       font-size: 16px;
       font-weight: 600;
+      word-wrap: break-word;
       color: $yt-sub-text;
       padding-bottom: 5px;
       border-bottom: 1px solid $yt-sub-text;

@@ -65,8 +65,14 @@
 .guide__anchor {
   margin-top: 20px;
   h1 {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 900;
     text-align: center;
+    a {
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 10px;
+    }
   }
 }
 

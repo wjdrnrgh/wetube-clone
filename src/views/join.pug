@@ -12,7 +12,7 @@ block content
             div.garbage__box__l
             input(name="username" type="text" required placeholder="Username")
             div.garbage__box__l
-            input(name="password" type="password" required placeholder="Password")
+            input(name="password" type="password" required placeholder="Password" pattern=".{8,}" title="최소 8자 이상 입력해주세요.")
             div.garbage__box__l
             input(name="password2" type="password" required placeholder="Confirm Password")
             div.garbage__box__l
@@ -20,6 +20,7 @@ block content
             div.garbage__box__l
             input(type="submit" value="Create")
         div.guide__anchor
-            h1 Already have an account? 
+            h1 기존 계정이 있으신가요?
                 br
-                a(href="/login") Log in now &rarr;
+                a(href="/join") 로그인 바로가기 
+                    i.bi.bi-arrow-right-circle

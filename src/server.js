@@ -1,7 +1,7 @@
 ///Package
-
 import express from "express";
 import session from "express-session";
+import flash from "express-flash";
 import morgan from "morgan";
 import MongoStore from "connect-mongo";
 
@@ -21,6 +21,8 @@ app.set("views", process.cwd() + "/src/views"); //view engine cwd change
 const logger = morgan("dev");
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
+
+app.use(flash());
 
 //Session Middleware
 //브라우저와 백엔드가 상호작용 할 때마다 해당 middleware 가 브라우저에 cookie 를 전송한다.

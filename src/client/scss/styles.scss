@@ -10,6 +10,7 @@
 @import "./components/find-video.scss";
 @import "./components/shared.scss";
 @import "./components/forms.scss";
+@import "./components/message.scss";
 
 //  Screens
 @import "./screens/home.scss";
@@ -39,10 +40,8 @@ body {
   color: #ffffff;
 }
 
-/*
 main {
-  max-width: 1200px;
   width: 100%;
-  margin: 50px auto 50px auto;
+  height: 100%;
+  display: inline-block;
 }
-*/

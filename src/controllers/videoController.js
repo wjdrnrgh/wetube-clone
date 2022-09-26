@@ -72,7 +72,6 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video Not Found" });
   }
   if (String(video.owner) !== String(_id)) {
-    console.log("delete");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);

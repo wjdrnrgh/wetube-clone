@@ -261,7 +261,6 @@ export const postChangePassword = async (req, res) => {
   await user.save();
   //session update
   req.session.user.password = user.password;
-
   return res.redirect("/users/logout"); //비밀번호가 변경되어 강제 로그아웃
 };
 
