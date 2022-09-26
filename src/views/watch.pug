@@ -53,5 +53,13 @@ block content
                 div.watch__edit
                     a(href=`${video.id}/edit`) Edit Video &rarr;
                     a(href=`${video.id}/delete`) Delete Video &rarr;
+        if loggedIn
+            div.video__comments(style="margin-top:30px")
+                form.comments__form#commentForm
+                    textarea(cols="30", rows="10" placeholder="댓글 추가...")
+                    button(type="button")#clearBtn 취소
+                    button(type="submit")#addBtn 댓글
 block scripts
     script(src="/assets/js/videoPlayer.js") 
+    if loggedIn
+        script(src="/assets/js/commentSection.js") 

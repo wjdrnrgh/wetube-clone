@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   location: { type: String },
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
+  comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   //Github
   githubLogin: { type: Boolean, default: false },
   avatarUrl: { type: String },

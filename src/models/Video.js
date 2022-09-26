@@ -13,6 +13,7 @@ const videoSchema = new mongoose.Schema({
     rating: { type: Number, default: 0 },
   },
   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 //Video 모델 함수를 직접 만들어 사용(hashtag 처리 함수)
@@ -22,5 +23,5 @@ videoSchema.static("formatHashtags", function (hashtags) {
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });
 
-const movieModel = mongoose.model("Video", videoSchema);
-export default movieModel;
+const Video = mongoose.model("Video", videoSchema);
+export default Video;
