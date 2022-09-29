@@ -21,7 +21,7 @@ app.set("views", process.cwd() + "/src/views"); //view engine cwd change
 const logger = morgan("dev");
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); //backEnd에 도착한 string data를 다시 json obj 형식으로 변환하기 위한 코드
+app.use(express.json()); //backEnd에 도착한 string data를 다시 json obj 형식으로 변환하기 위한 미들웨어
 app.use(flash());
 
 //Session Middleware

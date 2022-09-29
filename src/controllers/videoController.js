@@ -1,6 +1,8 @@
 //database video model
 import Video from "../models/Video";
 import User from "../models/User";
+import Comment from "../models/Comment";
+import { async } from "regenerator-runtime";
 //root
 export const home = async (req, res) => {
   //callback 방식이 아닌 promise 방식
@@ -15,7 +17,7 @@ export const home = async (req, res) => {
 //video  "get"
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comment");
   if (video === null) {
     return res.render("404", { pageTitle: "Video Not Found" });
   }
@@ -35,6 +37,9 @@ export const search = async (req, res) => {
     })
       .sort({ createdAt: "desc" })
       .populate("owner");
+  } else {
+    req.flash("error", "검색어를 입력해주세요.");
+    return res.redirect("/");
   }
   res.render("search", { pageTitle: "Search", videos });
 };
@@ -144,8 +149,52 @@ export const registerView = async (req, res) => {
   return res.sendStatus(200); // 200 = OK
 };
 
-export const createComment = (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  return res.end();
+export const createComment = async (req, res) => {
+  const {
+    session: { user },
+    body: { text },
+    params: { id },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.sendStatus(404);
+  }
+  const comment = await Comment.create({
+    text,
+    video: id,
+    owner: user._id,
+    name: user.name,
+    avatarUrl: user.avatarUrl,
+  });
+  video.comment.push(comment._id); //생성한 댓글을 해당 비디오 comment 배열에 추가
+  await video.save();
+  return res.status(201).json({
+    newCommentId: comment._id,
+    newName: comment.name,
+    newAvatarUrl: comment.avatarUrl,
+    newOwner: comment.owner,
+  }); //frontEnd에 생성된 댓글의 정보를 전달
+};
+
+export const deleteComment = async (req, res) => {
+  const {
+    session: { user },
+    params: { id },
+  } = req;
+  const comment = await Comment.findById(id);
+  const video = await Video.findById(comment.video);
+  if (!comment) {
+    return res.sendStatus(404);
+  }
+  if (String(comment.owner) !== String(user._id)) {
+    return res.sendStatus(404);
+  }
+  await Comment.findByIdAndDelete(id); //대상 comment 를 id를 기준으로 제거
+  const newComments = video.comment.filter((comment) => {
+    //video.comment 배열 내 존재하는 comment id 값도 제거 후 해당 값이 제거된 새로운 배열을 리턴
+    return String(comment) !== String(id);
+  });
+  video.comment = newComments; //리턴 받은 새로운 배열으로 업데이트
+  await video.save();
+  res.sendStatus(201);
 };

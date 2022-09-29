@@ -164,4 +164,4 @@ video.addEventListener("ended", handelEnded); //frontEnd <-> backEnd
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 // Keydown Event
-window.addEventListener("keydown", handleKeyPlay);
+//window.addEventListener("keydown", handleKeyPlay);

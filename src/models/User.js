@@ -19,9 +19,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
     //userSchema property 중 password 영역이 수정된 경우에만 hash 진행
-    console.log(`Before Password : ${this.password}`); //암호화 전
     this.password = await bcrypt.hash(this.password, 5);
-    console.log(`After Password : ${this.password}`); //암호화 후
   }
 });
 

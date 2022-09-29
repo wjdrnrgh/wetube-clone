@@ -21,15 +21,6 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s linear, visibility 0.3s linear;
-    input[type="range"] {
-      cursor: pointer;
-      /*
-      &::-webkit-slider-thumb {
-      }
-      &::-webkit-slider-thumb:hover {
-      }
-      */
-    }
     button {
       cursor: pointer;
       display: flex;
@@ -112,11 +103,13 @@
   margin-top: 30px;
   padding-top: 30px;
   border-top: $yt-border-solid;
-  text-align: start;
+  text-align: end;
+  a:first-child {
+    margin-right: 10px;
+  }
   a {
     display: inline-block;
     padding: 7.5px 20px;
-    margin-right: 10px;
     background-color: $yt-navcolor;
     color: #ffffff;
     border: 1px solid #ffffff;
@@ -127,6 +120,78 @@
     &:hover {
       background-color: #ffffff;
       color: $yt-bgcolor;
+    }
+  }
+}
+
+div.video__add-comments {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+  form.comments__form {
+    display: flex;
+    flex-direction: column;
+    div.comment__create {
+      display: flex;
+      align-items: center;
+      textarea {
+        all: unset;
+        flex: 1;
+        box-sizing: border-box;
+        margin-left: 15px;
+        padding-top: 20px;
+        max-height: 60px;
+        &:focus {
+          margin-bottom: -1px;
+          border-bottom: 1px solid #ffffff;
+        }
+      }
+    }
+    div.comment__btn {
+      margin-top: 10px;
+      display: flex;
+      margin-left: auto;
+    }
+  }
+}
+div.video__comments {
+  display: inline-block;
+  width: 100%;
+  margin-top: 30px;
+  ul {
+    display: flex;
+    flex-direction: column;
+    #noComment {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+    .video__comment {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 20px;
+      a {
+        display: inline-block;
+      }
+      div.comment__wrap {
+        flex: 1;
+        margin-left: 15px;
+        .comment__info {
+          #comment__user {
+            margin-right: 5px;
+          }
+        }
+        #comment__text {
+          margin-top: 5px;
+          word-wrap: break-word;
+          #deleteComment {
+            float: right;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }

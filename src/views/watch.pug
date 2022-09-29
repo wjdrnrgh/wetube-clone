@@ -51,14 +51,48 @@ block content
         if user
             if String(video.owner._id) === String(user._id)
                 div.watch__edit
-                    a(href=`${video.id}/edit`) Edit Video &rarr;
-                    a(href=`${video.id}/delete`) Delete Video &rarr;
+                    a(href=`${video.id}/edit`) Edit Video
+                    a(href=`${video.id}/delete`) Delete Video
         if loggedIn
-            div.video__comments(style="margin-top:30px")
+            div.video__add-comments
                 form.comments__form#commentForm
-                    textarea(cols="30", rows="10" placeholder="댓글 추가...")
-                    button(type="button")#clearBtn 취소
-                    button(type="submit")#addBtn 댓글
+                    div.comment__create
+                        if user.avatarUrl
+                            if user.avatarUrl.includes("githubuser")
+                                img.user__profile(src=user.avatarUrl, alt="Profile")
+                            else
+                                img.user__profile(src="/"+user.avatarUrl, alt="Profile")
+                        else
+                            div.user-none__profile
+                                i.fa-solid.fa-user
+                        textarea(placeholder="댓글 추가...")
+                    div.comment__btn
+                        button(type="button" style="background-color: red; border:1px solid red; color:#ffffff").yt__btn#clearBtn 취소
+                        button(type="submit").yt__btn#addBtn 댓글
+        div.video__comments
+            ul
+                each comment in video.comment.reverse() 
+                    li.video__comment(data-id = comment._id)
+                        a(href="/users/"+String(comment.owner))
+                            if comment.avatarUrl
+                                if comment.avatarUrl.includes("githubuser")
+                                    img.user__profile(src=comment.avatarUrl, alt="Profile")
+                                else
+                                    img.user__profile(src="/"+comment.avatarUrl, alt="Profile")
+                            else
+                                div.user-none__profile
+                                    i.fa-solid.fa-user
+                        div.comment__wrap
+                            div.comment__info
+                                span#comment__user=comment.name
+                                span.video__subTxt#comment__date= comment.createdAt
+                            p#comment__text= comment.text
+                                if user
+                                    if String(comment.owner) === String(user._id)
+                                        span#deleteComment
+                                            i.bi.bi-x-lg
+                else 
+                    li#noComment 작성된 댓글이 없습니다.
 block scripts
     script(src="/assets/js/videoPlayer.js") 
     if loggedIn

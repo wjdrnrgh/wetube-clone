@@ -94,6 +94,22 @@
   }
 }
 
+.user__profile,
+.user-none__profile {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.user-none__profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $yt-navcolor;
+  i {
+    font-size: 1.5rem;
+  }
+}
+
 @media (max-width: 1250px) {
   .all__videos {
     justify-content: center;

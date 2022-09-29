@@ -78,7 +78,6 @@ export const finishGithubLogin = async (req, res) => {
       },
     })
   ).json();
-  console.log(tokenRequest);
 
   //access token 을 이용하여 필요한 정보 추출
   if ("access_token" in tokenRequest) {
@@ -92,7 +91,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(`User Data : ${userData}`);
     //user 정보를 읽어오더라도, 해당 유저의 email 정보가 private 설정 되어있는 경우 null로 표시되는 경우
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
@@ -101,7 +99,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(`Email Data : ${emailData}`);
 
     //로그인 성공 또는 실패 절차
     //응답받은 이메일 정보 안에 primary, verified 값이 모두 true인 이메일 정보 추출
@@ -110,13 +107,11 @@ export const finishGithubLogin = async (req, res) => {
     );
     if (!emailObj) {
       //일치하는 값을 찾지 못한 경우
-      console.log("primary, verified 값이 true 인 정보가 없음");
       return res.redirect("/login"); //왜 redirect 되었는지 안내 필요
     }
     let user = await User.findOne({ email: emailObj.email });
     if (!user) {
       //create an account, 해당 email을 가진 user가 없다는 것은 계정을 생성해야 된다는 것
-      console.log("일치하는 이메일 정보 없음, 신규 계정 생성");
       user = await User.create({
         name: userData.name,
         username: userData.login,
@@ -159,7 +154,6 @@ export const postLogin = async (req, res) => {
     });
   }
   //logged in
-  console.log("Logged IN!");
   req.session.loggedIn = true;
   req.session.user = user;
   res.redirect("/");
@@ -181,7 +175,6 @@ export const postEdit = async (req, res) => {
     //upload file info
     file,
   } = req;
-  console.log(file);
 
   //과제 : 사용자가 변경하려하는 정보(userName, Email)가 이미 있는 경우에 대한 처리
   if (req.session.user.email !== req.body.email) {

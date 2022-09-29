@@ -56,9 +56,7 @@ const handleStart = () => {
 
   recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
   recorder.ondataavailable = (event) => {
-    //console.log(event.data);
     videoFile = URL.createObjectURL(event.data); //URL.createObjectURL() = 브라우저 메모리에서만 유효한 URL 생성, "생성된 파일의 경로"
-    //console.log(videoFile);
     video.srcObject = null;
     video.src = videoFile;
     video.loop = true;
