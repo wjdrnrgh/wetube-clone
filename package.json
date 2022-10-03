@@ -4,8 +4,11 @@
   "description": "youtube clone",
   "main": "index.js",
   "scripts": {
+    "start": "node build/init.js",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production --config webpack.config.js",
     "dev:server": "nodemon --config nodemon.json",
-    "dev:assets": "webpack --config webpack.config.js"
+    "dev:assets": "webpack --mode=development --config webpack.config.js --watch"
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,7 @@
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.17.12",
     "@babel/node": "^7.17.10",
     "@babel/preset-env": "^7.17.12",

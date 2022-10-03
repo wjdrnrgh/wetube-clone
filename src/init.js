@@ -1,3 +1,6 @@
+//async await
+import "regenerator-runtime";
+
 //Environment Variable File
 import "dotenv/config";
 

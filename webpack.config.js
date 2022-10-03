@@ -15,8 +15,10 @@ module.exports = {
       filename: "css/styles.css",
     }),
   ],
-  mode: "development",
-  watch: true,
+  /*
+  mode: "development", = webpack 실행 옵션(development or production)
+  watch: true, -> watch = 파일 변화 모니터링 옵션
+  */
   output: {
     filename: "js/[name].js", //[name] = Object 형식으로 선언된 entry 변수 내에 있는 값에 따라 output 파일 생성
     path: path.resolve(__dirname, "assets"),
