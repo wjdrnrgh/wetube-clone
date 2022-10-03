@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   //paswword = 기존엔 required 옵션이 true 였지만, github 로그인 과정에서 문제가 발생하여 false
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: false, minLength: 8 },
+  password: { type: String, required: false },
   name: { type: String, required: true },
   location: { type: String },
   videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
